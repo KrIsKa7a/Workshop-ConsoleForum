@@ -1,0 +1,15 @@
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.deps.json
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.json
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.dev.json
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.pdb
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csprojResolveAssemblyReference.cache
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csproj.CoreCompileInputs.cache
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfoInputs.cache
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfo.cs
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.pdb
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Models.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.pdb
+D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Models.pdb
