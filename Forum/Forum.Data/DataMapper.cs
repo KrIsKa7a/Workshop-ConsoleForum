@@ -83,12 +83,23 @@ namespace Forum.Data
 
                 var id = int.Parse(dataCategoriesArgs[0]);
                 var name = dataCategoriesArgs[1];
-                var postIds = dataCategoriesArgs[2]
-                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                    .Select(int.Parse)
-                    .ToArray();
 
-                var category = new Category(id, name, postIds);
+                Category category = null;
+
+                try
+                {
+                    var postIds = dataCategoriesArgs[2]
+                                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                .Select(int.Parse)
+                                .ToArray();
+
+                    category = new Category(id, name, postIds);
+                }
+                catch (Exception)
+                {
+                    category = new Category(id, name, new List<int>());
+                }
+
                 categories.Add(category);
             }
 
@@ -132,12 +143,21 @@ namespace Forum.Data
                 var id = int.Parse(dataUsersArgs[0]);
                 var userName = dataUsersArgs[1];
                 var password = dataUsersArgs[2];
-                var postIds = dataUsersArgs[3]
-                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                    .Select(int.Parse)
-                    .ToArray();
 
-                var user = new User(id, userName, password, postIds);
+                User user = null;
+
+                try
+                {
+                    var postIds = dataUsersArgs[3]
+                                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                .Select(int.Parse)
+                                .ToArray();
+                    user = new User(id, userName, password, postIds);
+                }
+                catch (Exception)
+                {
+                    user = new User(id, userName, password, new List<int>());
+                }
 
                 users.Add(user);
             }
@@ -186,12 +206,22 @@ namespace Forum.Data
                 var content = dataPostArgs[2];
                 var categoryId = int.Parse(dataPostArgs[3]);
                 var authorId = int.Parse(dataPostArgs[4]);
-                var replyIds = dataPostArgs[5]
-                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
-                    .Select(int.Parse)
-                    .ToArray();
 
-                var post = new Post(id, title, content, categoryId, authorId, replyIds);
+                Post post = null;
+
+                try
+                {
+                    var replyIds = dataPostArgs[5]
+                                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                .Select(int.Parse)
+                                .ToArray();
+
+                    post = new Post(id, title, content, categoryId, authorId, replyIds);
+                }
+                catch (Exception)
+                {
+                    post = new Post(id, title, content, categoryId, authorId, new List<int>());
+                }
 
                 posts.Add(post);
             }

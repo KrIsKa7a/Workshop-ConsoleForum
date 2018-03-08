@@ -146,12 +146,18 @@
 
         private void LogOut()
         {
-            throw new NotImplementedException();
+            this.Username = string.Empty;
+            this.LogOutUser();
+            this.RenderCurrentView();
         }
 
         private void SuccessfulLogin()
         {
-            throw new NotImplementedException();
+            var loginController = (IReadUserInfoController)this.CurrentController;
+            this.Username = loginController.Username;
+
+            this.LogInUser();
+            RedirectToMenu(MenuState.Main);
         }
 
         private void ViewPost()
@@ -178,17 +184,36 @@
 
         private bool RedirectToMenu(MenuState newState)
         {
-            throw new NotImplementedException();
+            if (this.State != newState)
+            {
+                this.controllerHistory.Push((int)newState);
+                this.RenderCurrentView();
+                return true;
+            }
+
+            return false;
         }
 
         private void LogInUser()
         {
-            throw new NotImplementedException();
+            foreach (var controller in this.controllers)
+            {
+                if (controller is IUserRestrictedController userRestrictedController)
+                {
+                    userRestrictedController.UserLogIn();
+                }
+            }
         }
 
         private void LogOutUser()
         {
-            throw new NotImplementedException();
+            foreach (var controller in this.controllers)
+            {
+                if (controller is IUserRestrictedController userRestrictedController)
+                {
+                    userRestrictedController.UserLogOut();
+                }
+            }
         }
     }
 }

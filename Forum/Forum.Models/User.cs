@@ -4,6 +4,14 @@ namespace Forum.Models
 {
     public class User
     {
+        public User(int id, string username, string password)
+        {
+            this.Id = id;
+            this.Username = username;
+            this.Password = password;
+            this.Posts = new List<int>();
+        }
+
         public User(int id, string username, string password, IEnumerable<int> posts)
         {
             this.Id = id;
