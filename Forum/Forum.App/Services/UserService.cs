@@ -60,5 +60,27 @@ namespace Forum.App.Services
 
             return SignUpStatus.UsernameTakenError;
         }
+
+        internal static User GetUser(string userName)
+        {
+            var forumData = new ForumData();
+
+            var user = forumData
+                .Users
+                .Find(u => u.Username == userName);
+
+            return user;
+        }
+
+        internal static User GetUser(int authorId)
+        {
+            var forumData = new ForumData();
+
+            var user = forumData
+                .Users
+                .Find(u => u.Id == authorId);
+
+            return user;
+        }
     }
 }
