@@ -1,51 +1,53 @@
 ﻿namespace Forum.App.Controllers
 {
-    using Forum.App.Controllers.Contracts;
-    using Forum.App.Services;
-    using Forum.App.UserInterface.Contracts;
-    using Forum.App.UserInterface.Input;
-    using Forum.App.UserInterface.ViewModels;
-    using Forum.App.Views;
     using System.Linq;
+    using Forum.App.Controllers.Contracts;
+    using Forum.App.UserInterface.Contracts;
+    using Services;
+    using UserInterface.Input;
+    using UserInterface.ViewModels;
+    using Views;
 
     public class AddReplyController : IController
     {
+        private enum Command
+        {
+            Write,
+            Submit,
+            Back
+        }
+
         private const int TEXT_AREA_WIDTH = 37;
         private const int TEXT_AREA_HEIGHT = 6;
         private const int POST_MAX_LENGTH = 220;
+        private const int TOP_OFFSET = 7;
 
-        private enum Command
-        {
-            Write, Reply, Back
-        }
-
-        private static int centerTop = Position.ConsoleCenter().Top;
         private static int centerLeft = Position.ConsoleCenter().Left;
 
-        public AddReplyController()
-        {
-            this.Post = new PostViewModel();
-            this.ResetReply();
-        }
+        private static int centerTop = Position.ConsoleCenter().Top;
 
-        public PostViewModel Post { get; private set; }
-
-        public ReplyViewModel Reply { get; private set; }
-
-        private TextArea TextArea { get; set; }
+        private PostViewModel post;
 
         public bool Error { get; private set; }
+
+        public int PostId { get; private set; }
+
+        public TextArea TextArea { get; private set; }
+
+        private ReplyViewModel Reply { get; set; }
+
+        private int TextAreaTopOffset => centerTop - (TOP_OFFSET - this.post.Content.Count) + 1;
 
         public MenuState ExecuteCommand(int index)
         {
             switch ((Command)index)
             {
                 case Command.Write:
-                    this.TextArea.Write();
-                    this.Reply.Content = this.TextArea.Lines.ToList();
+                    TextArea.Write();
+                    Reply.Content = this.TextArea.Lines.ToList();
                     return MenuState.AddReply;
-                case Command.Reply:
-                    bool validReply = ReplyService.TrySaveReply(this.Reply, this.Post);
+                case Command.Submit:
+                    var validReply = PostService.TryAddReply(this.post.PostId, this.Reply);
                     if (!validReply)
                     {
                         this.Error = true;
@@ -61,21 +63,25 @@
 
         public IView GetView(string userName)
         {
-            this.Reply.Author = userName;
-            return new AddReplyView(this.Post, this.Reply, this.TextArea, this.Error);
+            return new AddReplyView(post, Reply, TextArea, Error);
         }
 
         public void ResetReply()
         {
-            this.Error = false;
-            this.Reply = new ReplyViewModel();
-            this.TextArea = new TextArea(centerLeft - 18, centerTop - 7, TEXT_AREA_WIDTH, TEXT_AREA_HEIGHT, POST_MAX_LENGTH);
+            TextArea = new TextArea(
+                centerLeft - 18,
+                TextAreaTopOffset,
+                TEXT_AREA_WIDTH,
+                TEXT_AREA_HEIGHT,
+                POST_MAX_LENGTH);
+            Reply = new ReplyViewModel();
+            Error = false;
         }
 
         public void SetReplyToPost(int postId, string username)
         {
-            this.Post.PostId = postId;
-            this.Post = PostService.GetPostViewModel(postId);
+            this.PostId = postId;
+            this.post = PostService.GetPostViewModel(postId);
 
             this.ResetReply();
             this.Reply.Author = username;

@@ -138,7 +138,7 @@
         private void AddReply()
         {
             var addReplyController = (AddReplyController)CurrentController;
-            var postId = addReplyController.Post.PostId;
+            var postId = addReplyController.PostId;
 
             var viewPostController = (PostDetailsController)controllers[(int)MenuState.ViewPost];
             viewPostController.SetPostId(postId);

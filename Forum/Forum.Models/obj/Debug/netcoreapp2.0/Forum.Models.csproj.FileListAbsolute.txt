@@ -7,3 +7,12 @@ D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.Models\obj\Debug\netc
 D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.AssemblyInfo.cs
 D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.dll
 D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.pdb
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\bin\Debug\netcoreapp2.0\Forum.Models.deps.json
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\bin\Debug\netcoreapp2.0\Forum.Models.dll
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\bin\Debug\netcoreapp2.0\Forum.Models.pdb
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.csprojResolveAssemblyReference.cache
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.csproj.CoreCompileInputs.cache
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.AssemblyInfoInputs.cache
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.AssemblyInfo.cs
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.dll
+D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.Models\obj\Debug\netcoreapp2.0\Forum.Models.pdb
