@@ -1,263 +1,77 @@
 ﻿namespace Forum.App
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Forum.App.Controllers;
-    using Forum.App.Controllers.Contracts;
-    using Forum.App.Services;
-    using Forum.App.UserInterface;
-    using Forum.App.UserInterface.Contracts;
+	using System;
 
-    internal class MenuController
-    {
-        private const int DEFAULT_INDEX = 0;
+	using Microsoft.Extensions.DependencyInjection;
 
-        private IController[] controllers;
-        private Stack<int> controllerHistory;
-        private int currentOptionIndex;
-        private ForumViewEngine forumViewer;
+	using Contracts;
+	using Menus;
 
-        public MenuController(IEnumerable<IController> controllers, ForumViewEngine forumViewer)
-        {
-            this.controllers = controllers.ToArray();
-            this.forumViewer = forumViewer;
+	internal class MenuController : IMainController
+	{
+		private IServiceProvider serviceProvider;
 
-            InitializeControllerHistory();
+		private IForumViewEngine viewEngine;
+		private ISession session;
+		private ICommandFactory commandFactory;
 
-            this.currentOptionIndex = DEFAULT_INDEX;
-        }
+		public MenuController(IServiceProvider serviceProvider, IForumViewEngine viewEngine, ISession session, ICommandFactory commandFactory)
+		{
+            this.serviceProvider = serviceProvider;
+            this.viewEngine = viewEngine;
+            this.session = session;
+            this.commandFactory = commandFactory;
+            this.InitializeSession();
+		}
 
-        private string Username { get; set; }
-        private IView CurrentView { get; set; }
+		private string Username { get; set; }
 
-        private MenuState State => (MenuState)controllerHistory.Peek();
-        private int CurrentControllerIndex => this.controllerHistory.Peek();
-        private IController CurrentController => this.controllers[this.controllerHistory.Peek()];
-        internal ILabel CurrentLabel => this.CurrentView.Buttons[currentOptionIndex];
+		private IMenu CurrentMenu => this.session.CurrentMenu;
 
-        private void InitializeControllerHistory()
-        {
-            if (controllerHistory != null)
-            {
-                throw new InvalidOperationException($"{nameof(controllerHistory)} already initialized!");
-            }
-            int mainControllerIndex = 0;
-            this.controllerHistory = new Stack<int>();
-            this.controllerHistory.Push(mainControllerIndex);
-            this.RenderCurrentView();
-        }
+		private void InitializeSession()
+		{
+			this.session.PushView(new MainMenu(this.session,
+				this.serviceProvider.GetService<ILabelFactory>(),
+				this.serviceProvider.GetService<ICommandFactory>()));
 
-        internal void PreviousOption()
-        {
-            this.currentOptionIndex--;
+			this.RenderCurrentView();
+		}
 
-            if (this.currentOptionIndex < 0)
-            {
-                this.currentOptionIndex += this.CurrentView.Buttons.Length;
-            }
+		private void RenderCurrentView()
+		{
+			this.viewEngine.RenderMenu(this.CurrentMenu);
+		}
 
-            if (this.CurrentLabel.IsHidden)
-            {
-                this.PreviousOption();
-            }
-        }
+		public void MarkOption()
+		{
+			this.viewEngine.Mark(this.CurrentMenu.CurrentOption);
+		}
 
-        internal void NextOption()
-        {
-            this.currentOptionIndex++;
+		public void UnmarkOption()
+		{
+			this.viewEngine.Mark(this.CurrentMenu.CurrentOption, false);
+		}
 
-            int totalOptions = this.CurrentView.Buttons.Length;
+		public void NextOption()
+		{
+			this.CurrentMenu.NextOption();
+		}
 
-            if (this.currentOptionIndex >= totalOptions)
-            {
-                this.currentOptionIndex -= totalOptions;
-            }
+		public void PreviousOption()
+		{
+			this.CurrentMenu.PreviousOption();
+		}
 
-            if (this.CurrentLabel.IsHidden)
-            {
-                this.NextOption();
-            }
-        }
+		public void Back()
+		{
+			this.session.Back();
+			RenderCurrentView();
+		}
 
-        internal void Back()
-        {
-            if (this.State == MenuState.Categories || this.State == MenuState.OpenCategory)
-            {
-                IPaginationController currentController = (IPaginationController)this.CurrentController;
-                currentController.CurrentPage = 0;
-            }
-
-            if (controllerHistory.Count > 1)
-            {
-                controllerHistory.Pop();
-                this.currentOptionIndex = DEFAULT_INDEX;
-            }
-            RenderCurrentView();
-        }
-
-        internal void ExecuteCommand()
-        {
-            MenuState newState = this.CurrentController.ExecuteCommand(currentOptionIndex);
-            switch (newState)
-            {
-                case MenuState.PostAdded:
-                    AddPost();
-                    break;
-                case MenuState.OpenCategory:
-                    OpenCategory();
-                    break;
-                case MenuState.ViewPost:
-                    ViewPost();
-                    break;
-                case MenuState.SuccessfulLogIn:
-                    SuccessfulLogin();
-                    break;
-                case MenuState.LoggedOut:
-                    LogOut();
-                    break;
-                case MenuState.Back:
-                    this.Back();
-                    break;
-				case MenuState.Error:
-                case MenuState.Rerender:
-                    RenderCurrentView();
-                    break;
-                case MenuState.AddReplyToPost:
-                    RedirectToAddReply();
-                    break;
-                case MenuState.ReplyAdded:
-                    AddReply();
-                    break;
-                default:
-                    this.RedirectToMenu(newState);
-                    break;
-            }
-        }
-
-        private void AddReply()
-        {
-            var addReplyController = (AddReplyController)CurrentController;
-            var postId = addReplyController.PostId;
-
-            var viewPostController = (PostDetailsController)controllers[(int)MenuState.ViewPost];
-            viewPostController.SetPostId(postId);
-
-            Back();
-        }
-
-        private void RedirectToAddReply()
-        {
-            var viewPostController = (PostDetailsController)CurrentController;
-            var postId = viewPostController.PostId;
-            var addReplyController = (AddReplyController)controllers[(int)MenuState.AddReply];
-
-            addReplyController.SetReplyToPost(postId, Username);
-
-            RedirectToMenu(MenuState.AddReply);
-        }
-
-        private void LogOut()
-        {
-            this.Username = string.Empty;
-            this.LogOutUser();
-            this.RenderCurrentView();
-        }
-
-        private void SuccessfulLogin()
-        {
-            var loginController = (IReadUserInfoController)this.CurrentController;
-            this.Username = loginController.Username;
-
-            this.LogInUser();
-            RedirectToMenu(MenuState.Main);
-        }
-
-        private void ViewPost()
-        {
-            var categoryController = (CategoryController)this.CurrentController;
-
-            var categoryId = categoryController.CategoryId;
-
-            var posts = PostService
-                .GetPostsByCategory(categoryId);
-
-            var postIndex = categoryController.CurrentPage * CategoryController.PAGE_OFFSET + this.currentOptionIndex;
-            var postId = posts[postIndex - 1].Id;
-
-            var postController = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
-            postController.SetPostId(postId);
-
-            this.RedirectToMenu(MenuState.ViewPost);
-        }
-
-        private void OpenCategory()
-        {
-            var categoriesController = (CategoriesController)this.CurrentController;
-
-            var categoryIndex = categoriesController.CurrentPage * CategoriesController.PAGE_OFFSET + this.currentOptionIndex;
-
-            var categoryCtrlr = (CategoryController)this.controllers[(int)MenuState.OpenCategory];
-            categoryCtrlr.SetCategory(categoryIndex);
-
-            this.RedirectToMenu(MenuState.OpenCategory);
-        }
-
-        private void AddPost()
-        {
-            var addPostController = (AddPostController)this.CurrentController;
-
-            var postId = addPostController.Post.PostId;
-
-            var postViewer = (PostDetailsController)this.controllers[(int)MenuState.ViewPost];
-            postViewer.SetPostId(postId);
-
-            addPostController.ResetPost();
-
-            this.controllerHistory.Pop();
-
-            this.RedirectToMenu(MenuState.ViewPost);
-        }
-
-        private void RenderCurrentView()
-        {
-            this.CurrentView = this.CurrentController.GetView(this.Username);
-            this.currentOptionIndex = DEFAULT_INDEX;
-            this.forumViewer.RenderView(this.CurrentView);
-        }
-
-        private bool RedirectToMenu(MenuState newState)
-        {
-            if (this.State != newState)
-            {
-                this.controllerHistory.Push((int)newState);
-                this.RenderCurrentView();
-                return true;
-            }
-
-            return false;
-        }
-
-        private void LogInUser()
-        {
-            foreach (var controller in this.controllers)
-            {
-                if (controller is IUserRestrictedController userRestrictedController)
-                {
-                    userRestrictedController.UserLogIn();
-                }
-            }
-        }
-
-        private void LogOutUser()
-        {
-            foreach (var controller in this.controllers)
-            {
-                if (controller is IUserRestrictedController userRestrictedController)
-                {
-                    userRestrictedController.UserLogOut();
-                }
-            }
-        }
-    }
+		public void Execute()
+		{
+			this.session.PushView(this.CurrentMenu.ExecuteCommand());
+			this.RenderCurrentView();
+		}
+	}
 }

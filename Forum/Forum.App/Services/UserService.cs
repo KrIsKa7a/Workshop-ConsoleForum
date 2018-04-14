@@ -1,86 +1,85 @@
-﻿using Forum.Data;
-using Forum.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static Forum.App.Controllers.SignUpController;
-
-namespace Forum.App.Services
+﻿namespace Forum.App.Services
 {
-    public static class UserService
+    using Forum.App.Contracts;
+    using Forum.Data;
+    using Forum.DataModels;
+    using System;
+    using System.Linq;
+
+    public class UserService : IUserService
     {
-        public static bool TryLogInUser(string username, string password)
+        private ForumData forumData;
+        private ISession session;
+
+        public UserService(ForumData forumData, ISession session)
         {
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            this.forumData = forumData;
+            this.session = session;
+        }
+
+        public User GetUserById(int userId)
+        {
+            var user = this.forumData.Users
+                .FirstOrDefault(u => u.Id == userId);
+
+            return user;
+        }
+
+        public string GetUserName(int userId)
+        {
+            var user = this.forumData.Users
+                .FirstOrDefault(u => u.Id == userId);
+
+            return user.Username;
+        }
+
+        public bool TryLogInUser(string username, string password)
+        {
+            if (String.IsNullOrWhiteSpace(username) || String.IsNullOrWhiteSpace(password))
             {
                 return false;
             }
 
-            var forumData = new ForumData();
+            var user = this.forumData.Users
+                .FirstOrDefault(u => u.Username == username && u.Password == password);
 
-            bool userExists = forumData
-                .Users
-                .Any(u => u.Username == username && u.Password == password);
+            if (user == null)
+            {
+                return false;
+            }
 
-            return userExists;
+            this.session.Reset();
+            this.session.LogIn(user);
+
+            return true;
         }
 
-        public static SignUpStatus TrySignUpUser(string username, string password)
+        public bool TrySignUpUser(string username, string password)
         {
-            bool validUsername = !string.IsNullOrWhiteSpace(username) 
-                && username.Length > 3;
-
-            bool validPassword = !string.IsNullOrWhiteSpace(password)
-                && password.Length > 3;
+            bool validUsername = !String.IsNullOrWhiteSpace(username) && username.Length > 3;
+            bool validPassword = !String.IsNullOrWhiteSpace(password) && password.Length > 3;
 
             if (!validUsername || !validPassword)
             {
-                return SignUpStatus.DetailsError;
+                throw new ArgumentException("Username and Password must be longer than 3 symbols!");
             }
 
-            var forumData = new ForumData();
+            bool userAlreadyExists = this.forumData.Users.Any(u => u.Username == username);
 
-            bool userAlreadyExists = forumData
-                .Users
-                .Any(u => u.Username == username);
-
-            if (!userAlreadyExists)
+            if (userAlreadyExists)
             {
-                var userId = forumData
-                    .Users
-                    .LastOrDefault()?.Id + 1 ?? 1;
-                var user = new User(userId, username, password);
-
-                forumData.Users.Add(user);
-                forumData.SaveChanges();
-
-                return SignUpStatus.Success;
+                throw new InvalidOperationException("Username taken!");
             }
 
-            return SignUpStatus.UsernameTakenError;
-        }
+            var userId = forumData.Users.LastOrDefault()?.Id + 1 ?? 1;
+            var user = new User(userId, username, password);
 
-        internal static User GetUser(string userName)
-        {
-            var forumData = new ForumData();
+            this.forumData.Users.Add(user);
+            this.forumData.SaveChanges();
 
-            var user = forumData
-                .Users
-                .Find(u => u.Username == userName);
+            this.TryLogInUser(username, password);
 
-            return user;
-        }
-
-        internal static User GetUser(int authorId)
-        {
-            var forumData = new ForumData();
-
-            var user = forumData
-                .Users
-                .Find(u => u.Id == authorId);
-
-            return user;
+            return true;
         }
     }
 }

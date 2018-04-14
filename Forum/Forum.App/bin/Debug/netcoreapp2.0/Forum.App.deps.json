@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    "signature": "b92615535b2dd74927e3422e6bcf3480f016e643"
   },
   "compilationOptions": {},
   "targets": {
@@ -9,23 +9,49 @@
       "Forum.App/1.0.0": {
         "dependencies": {
           "Forum.Data": "1.0.0",
-          "Forum.Models": "1.0.0"
+          "Forum.DataModels": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection": "2.0.0"
         },
         "runtime": {
           "Forum.App.dll": {}
         }
       },
+      "CsvHelper/6.1.1": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.4.0",
+          "System.Reflection.TypeExtensions": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CsvHelper.dll": {}
+        }
+      },
+      "Microsoft.CSharp/4.4.0": {},
+      "Microsoft.Extensions.DependencyInjection/2.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/2.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "System.Reflection.TypeExtensions/4.4.0": {},
       "Forum.Data/1.0.0": {
         "dependencies": {
-          "Forum.Models": "1.0.0"
+          "CsvHelper": "6.1.1",
+          "Forum.DataModels": "1.0.0"
         },
         "runtime": {
           "Forum.Data.dll": {}
         }
       },
-      "Forum.Models/1.0.0": {
+      "Forum.DataModels/1.0.0": {
         "runtime": {
-          "Forum.Models.dll": {}
+          "Forum.DataModels.dll": {}
         }
       }
     }
@@ -36,12 +62,47 @@
       "serviceable": false,
       "sha512": ""
     },
+    "CsvHelper/6.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jLHsA331mzpHaMZLaxnxoSBnrLNcQjtt4NheF6X7Ht3U/pf0y6ltZ5fLyLehpnDlm9iBB0vbn+QvmYOQ8l02XA==",
+      "path": "csvhelper/6.1.1",
+      "hashPath": "csvhelper.6.1.1.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vvVR/B08YVghQ4jHEloxqw2ZWzEGE1AOA5E0DioUM3ujbXz6FD3AfB/0Jl2ohJPd0nXYGwmPe1En6HTsSriq1A==",
+      "path": "microsoft.csharp/4.4.0",
+      "hashPath": "microsoft.csharp.4.4.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wakg18gHYiUL1pcjjyZuYk6OvDpbSw1E7IWxm78TMepsr+gQ8W0tWzuRm0q/9RFblngwPwo15rrgZSUV51W5Iw==",
+      "path": "microsoft.extensions.dependencyinjection/2.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.2.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eUdJ0Q/GfVyUJc0Jal5L1QZLceL78pvEM9wEKcHeI24KorqMDoVX+gWsMGLulQMfOwsUaPtkpQM2pFERTzSfSg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/2.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.2.0.0.nupkg.sha512"
+    },
+    "System.Reflection.TypeExtensions/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dkmh/ySlwnXJp/1qYP9uyKkCK1CXR/REFzl7abHcArxBcV91mY2CgrrzSRA5Z/X4MevJWwXsklGRdR3A7K9zbg==",
+      "path": "system.reflection.typeextensions/4.4.0",
+      "hashPath": "system.reflection.typeextensions.4.4.0.nupkg.sha512"
+    },
     "Forum.Data/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Forum.Models/1.0.0": {
+    "Forum.DataModels/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

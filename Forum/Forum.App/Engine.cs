@@ -1,75 +1,51 @@
 ﻿namespace Forum.App
 {
-    using System;
-	using System.Collections.Generic;
-	using Forum.App.Controllers;
-	using Forum.App.Controllers.Contracts;
-    using Forum.App.UserInterface;
+	using System;
+
+	using Contracts;
 
     public class Engine
     {
-        private ForumViewEngine forumViewer;
-        private MenuController menuController;
-		private IEnumerable<IController> controllers;
+        private IMainController menu;
 
-        public Engine()
+        public Engine(IMainController menuController)
         {
-			this.forumViewer = new ForumViewEngine();
-			this.controllers = InitializeControllers();
-
-			this.menuController = new MenuController(this.controllers, forumViewer);
+			this.menu = menuController;
         }
 
         internal void Run()
         {
             while (true)
             {
-                forumViewer.Mark(menuController.CurrentLabel);
+                menu.MarkOption();
 
                 var keyInfo = Console.ReadKey(true);
                 var key = keyInfo.Key;
 
-                forumViewer.Mark(menuController.CurrentLabel, false);
+				menu.UnmarkOption();
 
                 switch (key)
                 {
                     case ConsoleKey.Backspace:
                     case ConsoleKey.Escape:
-                        menuController.Back();
+                        menu.Back();
                         break;
                     case ConsoleKey.Home:
                         break;
                     case ConsoleKey.LeftArrow:
                     case ConsoleKey.UpArrow:
-                        menuController.PreviousOption();
+                        menu.PreviousOption();
                         break;
                     case ConsoleKey.Tab:
                     case ConsoleKey.RightArrow:
                     case ConsoleKey.DownArrow:
-                        menuController.NextOption();
+                        menu.NextOption();
                         break;
                     case ConsoleKey.Enter:
-                        menuController.ExecuteCommand();
+                        menu.Execute();
                         break;
                 }
             }
         }
-
-		private IEnumerable<IController> InitializeControllers()
-		{
-			var controllers = new List<IController>
-			{
-				new MainController(),
-				new LogInController(),
-				new CategoriesController(),
-				new CategoryController(),
-				new SignUpController(),
-				new PostDetailsController(),
-				new AddPostController(),
-				new AddReplyController(),
-			};
-
-			return controllers;
-		}
 	}
 }

@@ -1,30 +1,15 @@
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.deps.json
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.json
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.dev.json
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.dll
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.pdb
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csprojResolveAssemblyReference.cache
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csproj.CoreCompileInputs.cache
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfoInputs.cache
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfo.cs
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.dll
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.pdb
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.dll
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Models.dll
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.pdb
-D:\Homeworks\C#FundamentlasJan2018\WorkShop v4\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Models.pdb
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.deps.json
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.json
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.dev.json
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.dll
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.pdb
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.dll
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Models.dll
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.pdb
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\bin\Debug\netcoreapp2.0\Forum.Models.pdb
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csprojResolveAssemblyReference.cache
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csproj.CoreCompileInputs.cache
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfoInputs.cache
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfo.cs
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.dll
-D:\RepositoriesGit\Workshop-ConsoleForum\Forum\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.pdb
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.deps.json
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.json
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.runtimeconfig.dev.json
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.App.pdb
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.DataModels.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.Data.pdb
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\bin\Debug\netcoreapp2.0\Forum.DataModels.pdb
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csprojResolveAssemblyReference.cache
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.csproj.CoreCompileInputs.cache
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfoInputs.cache
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.AssemblyInfo.cs
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.dll
+D:\Homeworks\C#FundamentlasJan2018\WorkShop OOP Advanced\Forum.App\obj\Debug\netcoreapp2.0\Forum.App.pdb
